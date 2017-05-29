@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IPMEDT4</string>
+    <string name="app_name">Exocare</string>
     <string name="title_home">Gebroken</string>
     <string name="title_dashboard">Behandeld</string>
     <string name="title_notifications">Revalidatie</string>
