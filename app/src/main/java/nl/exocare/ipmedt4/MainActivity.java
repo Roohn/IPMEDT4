@@ -1,5 +1,6 @@
 package nl.exocare.ipmedt4;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;

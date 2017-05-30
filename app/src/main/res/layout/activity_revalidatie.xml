@@ -43,14 +43,5 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Revalidatie"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-
     </FrameLayout>
 </LinearLayout>
