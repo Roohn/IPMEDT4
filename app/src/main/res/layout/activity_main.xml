@@ -33,7 +33,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation"/>
+        android:background="@color/colorPrimaryDark"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        app:alpha="@drawable/colorstatelist"
+        app:itemIconTint="@drawable/colorstatelist"
+        app:itemTextColor="@drawable/colorstatelist"
+        app:menu="@menu/navigation" />
 
 </LinearLayout>

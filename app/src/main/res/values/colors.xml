@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FE5B5B</color>
-    <color name="colorPrimaryDark">#7F2E2E</color>
+    <color name="colorPrimary">#fe5b5b</color>
+    <color name="colorPrimaryDark">#7f2e2e</color>
     <color name="colorAccent">#1CB247</color>
+    <color name="colorPrimaryOverlay">#647f2e2e</color>
+
+    <color name="checked">#FFFFFF</color>
+    <color name="default_color">#FFFFFF</color>
 </resources>
