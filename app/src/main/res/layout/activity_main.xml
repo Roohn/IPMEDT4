@@ -22,7 +22,7 @@
 
             <include
                 android:id="@+id/include1"
-                layout="@layout/activity_gebroken" />
+                layout="@layout/activity_timeline" />
 
             <include
                 android:id="@+id/include2"
