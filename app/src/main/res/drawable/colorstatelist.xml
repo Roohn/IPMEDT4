@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--als een knop ingedrukt is-->
+    <item android:state_checked="true"
+        android:color="@color/checked" />
+    <!-- default -->
+    <item android:color="@color/default_color"
+        android:alpha="0.3"/>
+</selector>

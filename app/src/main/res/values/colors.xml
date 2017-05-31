@@ -3,5 +3,9 @@
     <color name="colorPrimary">#fe5b5b</color>
     <color name="colorPrimaryDark">#7F2E2E</color>
     <color name="colorAccent">#ffffff</color>
+    <color name="colorPrimaryOverlay">#647f2e2e</color>
+
+    <color name="checked">#FFFFFF</color>
+    <color name="default_color">#FFFFFF</color>
 </resources>
 
