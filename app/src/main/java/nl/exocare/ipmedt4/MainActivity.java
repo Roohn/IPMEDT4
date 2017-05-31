@@ -54,32 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ViewFlipper includeChange;
     private ImageView image;
-    private int nextImage;
 
     //database???
     private String jouwBreuk;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    includeChange.setDisplayedChild(0);
-                    return true;
-                case R.id.navigation_dashboard:
-                    includeChange.setDisplayedChild(1);
-                    return true;
-                case R.id.navigation_notifications:
-                    includeChange.setDisplayedChild(2);
-                    return true;
-            }
-            return false;
-        }
-
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +69,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // method call to initialize the listeners
         initListeners();
 
-
-        includeChange = (ViewFlipper)findViewById(R.id.vf);
+        //de bottom navigatie listener
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+    /**
+     * het veranderen van de views als er op de bottom navigatie wordt geklikt
+     */
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    //[username]
+                    includeChange.setDisplayedChild(0);
+                    return true;
+                case R.id.navigation_dashboard:
+                    //Behandeling
+                    includeChange.setDisplayedChild(1);
+                    return true;
+                case R.id.navigation_notifications:
+                    //Revalidatie
+                    includeChange.setDisplayedChild(2);
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     /**
      * method to initialize the views
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewTime2 = (TextView) findViewById(R.id.textViewTime_gips);
         imageViewReset = (ImageView) findViewById(R.id.imageViewReset);
         imageViewStartStop = (ImageView) findViewById(R.id.imageViewStartStop);
+        includeChange = (ViewFlipper)findViewById(R.id.vf);
     }
 
     /**
@@ -119,11 +124,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageViewStartStop.setOnClickListener(this);
     }
 
-    /**
-     * implemented method to listen clicks
-     *
-     * @param view
-     */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -271,13 +271,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * methode als er op het poppetje gedrukt wordt
+     *
+     * @param v
+     */
     public void imageClick(View v) {
         image = (ImageView) findViewById(v.getId());
         image.setDrawingCacheEnabled(true);
         image.setOnTouchListener(changeColorListener);
     }
 
-    //on touch listener voor het vinden van de kleuren en aangeklikte bot
+    /**
+     * on touch listener voor het vinden van de kleuren en het aangeklikte bot
+     *
+     */
     private final View.OnTouchListener changeColorListener = new View.OnTouchListener() {
 
         @Override
@@ -314,7 +322,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
-    //het opzoeken van welke kleur aangeraakt wordt
+    /**
+     * het opzoeken van welke kleur aangeraakt wordt
+     *
+     * @param hotspotId
+     * @param x
+     * @param y
+     * @return
+     */
     public int getHotspotColor (int hotspotId, int x, int y) {
         ImageView img = (ImageView) findViewById (hotspotId);
         img.setDrawingCacheEnabled(true);

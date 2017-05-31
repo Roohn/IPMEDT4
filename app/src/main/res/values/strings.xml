@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Exocare</string>
     <string name="title_home">[username]</string>
-    <string name="title_dashboard">Behandeld</string>
+    <string name="title_dashboard">Behandeling</string>
     <string name="title_notifications">Revalidatie</string>
     <string name="hint_minute">Minute</string>
     <string name="message_minutes">Please Enter Minutes...</string>
