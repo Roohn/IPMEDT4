@@ -15,26 +15,24 @@
             android:id="@+id/botzienAreas"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="90dp"
             android:clickable="true"
             android:onClick="imageClick"
             android:scaleType="fitCenter"
             android:src="@drawable/botzienareas"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="8dp" />
 
         <ImageView
             android:id="@+id/botzien"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="90dp"
             android:visibility="visible"
-            app:srcCompat="@drawable/botzien" />
+            app:srcCompat="@drawable/botzien"
+            app:layout_constraintTop_toTopOf="@+id/textBreuk"
+            tools:layout_editor_absoluteX="8dp" />
 
         <TextView
             android:id="@+id/textBreuk"
