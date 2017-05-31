@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#fe5b5b</color>
-    <color name="colorPrimaryDark">#7F2E2E</color>
+    <color name="colorPrimary">#f05454</color>
+    <color name="colorPrimaryDark">#a13a3a</color>
     <color name="colorAccent">#ffffff</color>
     <color name="colorPrimaryOverlay">#647f2e2e</color>
+    <color name="colorNavbar">#b74343</color>
 
     <color name="checked">#FFFFFF</color>
     <color name="default_color">#FFFFFF</color>

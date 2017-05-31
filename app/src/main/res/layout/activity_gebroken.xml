@@ -9,7 +9,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@drawable/gradient">
 
         <ImageView
             android:id="@+id/botzienAreas"
@@ -30,8 +30,8 @@
             android:layout_height="fill_parent"
             android:layout_marginTop="90dp"
             android:visibility="visible"
-            app:srcCompat="@drawable/botzien"
             app:layout_constraintTop_toTopOf="@+id/textBreuk"
+            app:srcCompat="@drawable/botzien"
             tools:layout_editor_absoluteX="8dp" />
 
         <TextView
