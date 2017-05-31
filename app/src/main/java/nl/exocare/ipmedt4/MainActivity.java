@@ -133,6 +133,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageViewStartStop:
                 startStop();
                 break;
+            case R.id.buttonFaq:
+                faqknop();
+                break;
+            case R.id.buttonStrek:
+                strekknop();
+                break;
+            case R.id.buttonKracht:
+                krachtknop();
+                break;
         }
     }
 
@@ -268,6 +277,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 TimeUnit.MILLISECONDS.toMinutes(milliSeconds) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliSeconds)));
         return hms;
 
+
+    }
+
+    /**
+     * Methodes voor de knoppen op de revalidatiepagina
+     * 
+     */
+
+    private void faqknop() {
+
+    }
+
+    private void strekknop() {
+
+    }
+
+    private void krachtknop() {
 
     }
 
