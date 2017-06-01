@@ -23,6 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.res.Resources;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.w3c.dom.Text;
@@ -43,17 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TimerStatus timerStatus = TimerStatus.STOPPED;
 
-    private ProgressBar progressBarCircle;
-    private ProgressBar progressBarCircle2;
+    private ProgressBar progressBarCircle, progressBarCircle2, tijdlijn;
     private EditText editTextMinute;
-    private TextView textViewTime;
-    private TextView textViewTime2;
-    private ImageView imageViewReset;
-    private ImageView imageViewStartStop;
+    private TextView textViewTime, beginDatum, eindDatum, textViewTime2;
+    private ImageView imageViewReset, imageViewStartStop, image;
     private CountDownTimer countDownTimer;
 
     private ViewFlipper includeChange;
-    private ImageView image;
 
     //database???
     private String jouwBreuk;
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //de bottom navigatie listener
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //Timeline vullen en goed zetten
+        fillTimeline();
     }
 
     /**
@@ -114,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageViewReset = (ImageView) findViewById(R.id.imageViewReset);
         imageViewStartStop = (ImageView) findViewById(R.id.imageViewStartStop);
         includeChange = (ViewFlipper)findViewById(R.id.vf);
+        beginDatum = (TextView) findViewById(R.id.beginDatum);
+        eindDatum = (TextView) findViewById(R.id.eindDatum);
+        tijdlijn = (ProgressBar) findViewById(R.id.vertical_progressbar);
     }
 
     /**
@@ -295,6 +302,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void krachtknop() {
 
+    }
+
+    /**
+     * Deze methode vult de tijdlijn en zorgt voor de format
+     */
+    private void fillTimeline() {
+        TimelineHandler timeline = null;
+        try {
+            timeline = new TimelineHandler();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //set de datums van begin en eind goed
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        beginDatum.setText(df.format(timeline.getBeginDatum()));
+        eindDatum.setText(df.format(timeline.getEindDatum()));
+
+        int trajectDuur = 0;
+        try {
+            //haal de duur van het herstellen op
+            trajectDuur = (int) timeline.getTrajectduur();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //de tijd die de patient al bezig is
+        int verstrekenTijd = (int) timeline.getVerstrekentijd();
+
+        //zorg dat tijdlijn progress juist is
+        tijdlijn.setMax(trajectDuur);
+        tijdlijn.setProgress(verstrekenTijd);
     }
 
     /**
