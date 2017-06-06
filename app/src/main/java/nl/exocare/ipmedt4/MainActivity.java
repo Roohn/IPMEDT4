@@ -57,9 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ProgressBar progressBarCircle, progressBarCircle2, tijdlijn;
     private EditText editTextMinute;
-    private TextView textViewTime, beginDatum, eindDatum, controleDatum, revalidatieDatum, textViewTime2;
+    private TextView textViewTime, beginDatum, eindDatum, controleDatum, revalidatieDatum, textViewTime2, datumGipsBehandeling, datumControleBehandeling;
     private ImageView imageViewReset, imageViewStartStop, image;
     private CountDownTimer countDownTimer;
+    TimelineHandler timeline = null;
 
     private ViewFlipper includeChange;
 
@@ -77,6 +78,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // method call to initialize the listeners
         initListeners();
 
+        //datums ophalen
+        try {
+            timeline = new TimelineHandler();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         //de bottom navigatie listener
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -92,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         this);
             }
         });
+
+        //Behandelingspagina datums goed zetten
+        fillBehandelingPagina();
     }
 
     /**
@@ -126,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * method to initialize the views
      */
     private void initViews() {
+        datumGipsBehandeling = (TextView) findViewById(R.id.datum_gips);
+        datumControleBehandeling = (TextView) findViewById(R.id.datum_controle);
         progressBarCircle = (ProgressBar) findViewById(R.id.progressBarCircle);
         progressBarCircle2 = (ProgressBar) findViewById(R.id.progressBarCircle_gips);
         editTextMinute = (EditText) findViewById(R.id.editTextMinute);
@@ -227,6 +240,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
+            //uit de timelinehandler halen
+//            time = 0;
+//            try {
+//                time = (int) timeline.getTrajectduur(timeline.getCurrentTime(), timeline.getControleDatum());
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
         } else {
             // toast message to fill edit text
 
@@ -309,21 +329,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Methodes voor de knoppen op de revalidatiepagina
-     * 
-     */
-
-    /**
      * Deze methode vult de tijdlijn en zorgt voor de format
      */
     private void fillTimeline() {
-        TimelineHandler timeline = null;
-        try {
-            timeline = new TimelineHandler();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         //set de datums van begin en eind goed
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         beginDatum.setText(df.format(timeline.getBeginDatum()));
@@ -369,6 +377,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //hoofdafstand
         ConstraintLayout.LayoutParams hoofdParams = (ConstraintLayout.LayoutParams) hoofdLayout.getLayoutParams();
         hoofdParams.topMargin = afstandHoofd;
+    }
+
+    /**
+     * het goedzetten van de datums op de behandelingspagina
+     */
+    public void fillBehandelingPagina() {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        datumGipsBehandeling.setText(df.format(timeline.getBeginDatum()));
+        datumControleBehandeling.setText(df.format(timeline.getControleDatum()));
     }
 
     /**
