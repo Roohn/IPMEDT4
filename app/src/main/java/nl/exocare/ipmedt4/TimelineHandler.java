@@ -7,15 +7,19 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class TimelineHandler {
-    Date dateBegin, dateEind;
+    Date dateBegin, dateEind, dateControle, dateRevalidatie;
 
     public TimelineHandler() throws ParseException {
         String beginDatum = "01 05 2017";
-        String eindDatum = "09 10 2017";
+        String eindDatum = "19 08 2017";
+        String controleDatum = "22 06 2017";
+        String revalidatieDatum = "11 07 2017";
 
         SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
         this.dateBegin = myFormat.parse(beginDatum);
         this.dateEind = myFormat.parse(eindDatum);
+        this.dateControle = myFormat.parse(controleDatum);
+        this.dateRevalidatie = myFormat.parse(revalidatieDatum);
     }
 
     public Date getBeginDatum() {
@@ -26,17 +30,29 @@ public class TimelineHandler {
         return dateEind;
     }
 
-    public long getTrajectduur() throws ParseException  {
-        long diff = dateEind.getTime() - dateBegin.getTime();
+    public Date getControleDatum() {
+        return dateControle;
+    }
+
+    public Date getRevalidatieDatum() {
+        return dateRevalidatie;
+    }
+
+    public long getTrajectduur(Date begin, Date eind) throws ParseException  {
+        long diff = eind.getTime() - begin.getTime();
 
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
     public long getVerstrekentijd() {
-        Calendar cal = Calendar.getInstance();
-        Date currentTime = cal.getTime();
+        Date currentTime = getCurrentTime();
 
         long verstrekentijd = currentTime.getTime() - dateBegin.getTime();
         return TimeUnit.DAYS.convert(verstrekentijd, TimeUnit.MILLISECONDS);
+    }
+
+    public Date getCurrentTime() {
+        Calendar cal = Calendar.getInstance();
+        return cal.getTime();
     }
 }

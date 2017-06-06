@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.ViewTreeObserver;
 import android.widget.ViewFlipper;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ProgressBar progressBarCircle, progressBarCircle2, tijdlijn;
     private EditText editTextMinute;
-    private TextView textViewTime, beginDatum, eindDatum, textViewTime2;
+    private TextView textViewTime, beginDatum, eindDatum, controleDatum, revalidatieDatum, textViewTime2;
     private ImageView imageViewReset, imageViewStartStop, image;
     private CountDownTimer countDownTimer;
 
@@ -74,8 +78,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Timeline vullen en goed zetten
-        fillTimeline();
+        //hoogte en breedte van het scherm bepalen en tijdlijn vullen
+        ViewTreeObserver observer = includeChange.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                fillTimeline();
+                includeChange.getViewTreeObserver().removeGlobalOnLayoutListener(
+                        this);
+            }
+        });
     }
 
     /**
@@ -120,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         includeChange = (ViewFlipper)findViewById(R.id.vf);
         beginDatum = (TextView) findViewById(R.id.beginDatum);
         eindDatum = (TextView) findViewById(R.id.eindDatum);
+        controleDatum = (TextView) findViewById(R.id.controleDatum);
+        revalidatieDatum = (TextView) findViewById(R.id.revalidatieDatum);
         tijdlijn = (ProgressBar) findViewById(R.id.vertical_progressbar);
     }
 
@@ -319,11 +334,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         beginDatum.setText(df.format(timeline.getBeginDatum()));
         eindDatum.setText(df.format(timeline.getEindDatum()));
+        controleDatum.setText(df.format(timeline.getControleDatum()));
+        revalidatieDatum.setText(df.format(timeline.getRevalidatieDatum()));
 
         int trajectDuur = 0;
         try {
             //haal de duur van het herstellen op
-            trajectDuur = (int) timeline.getTrajectduur();
+            trajectDuur = (int) timeline.getTrajectduur(timeline.getBeginDatum(), timeline.getEindDatum());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -333,6 +350,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //zorg dat tijdlijn progress juist is
         tijdlijn.setMax(trajectDuur);
         tijdlijn.setProgress(verstrekenTijd);
+
+        //zet de controle en begin revalidatie afspraken op de juiste hoogte in de tijdlijn
+        ConstraintLayout controleLayout = (ConstraintLayout) findViewById(R.id.controleLayout);
+        ConstraintLayout revalidatieLayout = (ConstraintLayout) findViewById(R.id.revalidatieLayout);
+        ConstraintLayout hoofdLayout = (ConstraintLayout) findViewById(R.id.hoofdLayout);
+        //voor het toevoegen van de controleafspraak
+        int procentPerPixel = includeChange.getHeight() / trajectDuur;
+        int afstandControle = 0;
+        int afstandRevalidatie = 0;
+        int afstandHoofd = 0;
+        try {
+            afstandControle = procentPerPixel * (int) (timeline.getTrajectduur(timeline.getBeginDatum(), timeline.getControleDatum()));
+            afstandRevalidatie = procentPerPixel * (int) (timeline.getTrajectduur(timeline.getBeginDatum(), timeline.getRevalidatieDatum()));
+            afstandHoofd = procentPerPixel * (int) (timeline.getTrajectduur(timeline.getBeginDatum(), timeline.getCurrentTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ConstraintLayout.LayoutParams controleParams = (ConstraintLayout.LayoutParams) controleLayout.getLayoutParams();
+        controleParams.topMargin = afstandControle;
+        ConstraintLayout.LayoutParams revalidatieParams = (ConstraintLayout.LayoutParams) revalidatieLayout.getLayoutParams();
+        revalidatieParams.topMargin = afstandRevalidatie;
+
+        //hoofdafstand
+        ConstraintLayout.LayoutParams hoofdParams = (ConstraintLayout.LayoutParams) hoofdLayout.getLayoutParams();
+        hoofdParams.topMargin = afstandHoofd;
     }
 
     /**

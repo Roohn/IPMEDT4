@@ -27,9 +27,6 @@
         android:id="@+id/beginLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -40,23 +37,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="0dp"
             android:text="06-07-2017"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/beginText" />
+            app:layout_constraintTop_toTopOf="@+id/beginText"
+            android:layout_marginEnd="16dp" />
 
         <TextView
             android:id="@+id/beginText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="42dp"
-            android:layout_marginTop="0dp"
             android:text="Gips Gekregen"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/beginIcon"
-            app:layout_constraintTop_toTopOf="@+id/beginIcon" />
+            app:layout_constraintTop_toTopOf="@+id/beginIcon"
+            android:layout_marginStart="42dp" />
 
         <ImageView
             android:id="@+id/beginIcon"
@@ -70,15 +67,139 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/broken" />
 
+        <ImageView
+            android:id="@+id/beginIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroundrounded"
+            app:layout_constraintTop_toTopOf="@+id/beginText"
+            app:layout_constraintRight_toLeftOf="@+id/beginText"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/controleLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/controleDatum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="06-07-2017"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/controleText"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/controleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:text="Controle Afspraak"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/controleIcon"
+            app:layout_constraintTop_toTopOf="@+id/controleIcon"
+            android:layout_marginStart="42dp" />
+
+        <ImageView
+            android:id="@+id/controleIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/backgroundrounded"
+            android:padding="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/controleicon" />
+
+        <ImageView
+            android:id="@+id/controleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroundrounded"
+            app:layout_constraintTop_toTopOf="@+id/controleText"
+            app:layout_constraintRight_toLeftOf="@+id/controleText"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/revalidatieLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/revalidatieDatum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="06-07-2017"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/revalidatieText"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/revalidatieText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:text="Begin Revalidatie"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/revalidatieIcon"
+            app:layout_constraintTop_toTopOf="@+id/revalidatieIcon"
+            android:layout_marginStart="42dp" />
+
+        <ImageView
+            android:id="@+id/revalidatieIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/backgroundrounded"
+            android:padding="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/revalidatie" />
+
+        <ImageView
+            android:id="@+id/revalidatieIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroundrounded"
+            app:layout_constraintTop_toTopOf="@+id/revalidatieText"
+            app:layout_constraintRight_toLeftOf="@+id/revalidatieText"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp" />
+
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/eindLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -89,23 +210,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="0dp"
             android:text="13-09-2017"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/eindText" />
+            app:layout_constraintTop_toTopOf="@+id/eindText"
+            android:layout_marginEnd="16dp" />
 
         <TextView
             android:id="@+id/eindText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="42dp"
-            android:layout_marginTop="0dp"
             android:text="Einde Revalidatie"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/eindIcon"
-            app:layout_constraintTop_toTopOf="@+id/eindIcon" />
+            app:layout_constraintTop_toTopOf="@+id/eindIcon"
+            android:layout_marginStart="42dp" />
 
         <ImageView
             android:id="@+id/eindIcon"
@@ -119,6 +240,34 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/running" />
+
+        <ImageView
+            android:id="@+id/eindIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroundrounded"
+            app:layout_constraintTop_toTopOf="@+id/eindText"
+            app:layout_constraintRight_toLeftOf="@+id/eindText"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/hoofdLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="57dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageHoofd"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/hoofd" />
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
