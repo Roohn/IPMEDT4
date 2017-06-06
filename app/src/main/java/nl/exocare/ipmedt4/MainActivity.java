@@ -1,5 +1,6 @@
 package nl.exocare.ipmedt4;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ import org.w3c.dom.Text;
 
 import java.sql.Time;
 import java.util.concurrent.TimeUnit;
+
+import static nl.exocare.ipmedt4.R.layout.activity_revalidatie;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -141,13 +144,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startStop();
                 break;
             case R.id.buttonFaq:
-                faqknop();
+                Intent intent1 = new Intent(MainActivity.this, FaqActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.buttonStrek:
-                strekknop();
+                Intent intent2 = new Intent(MainActivity.this, RekStrekActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.buttonKracht:
-                krachtknop();
+                Intent intent3 = new Intent(MainActivity.this, KrachtActivity.class);
+                startActivity(intent3);
                 break;
         }
     }
@@ -291,18 +297,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Methodes voor de knoppen op de revalidatiepagina
      * 
      */
-
-    private void faqknop() {
-
-    }
-
-    private void strekknop() {
-
-    }
-
-    private void krachtknop() {
-
-    }
 
     /**
      * Deze methode vult de tijdlijn en zorgt voor de format
