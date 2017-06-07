@@ -245,11 +245,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-<<<<<<< HEAD
      * Methodes voor de knoppen op de revalidatiepagina
-     * 
+     *
      */
-    protected void faqFunctie(View v){
+    public void faqFunctie(View v){
         Intent i = new Intent(this, FaqLijst.class);
 
         i.putExtra("firstKeyName", "FirstKeyValue");
@@ -259,8 +258,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-=======
->>>>>>> 30b7448279048ccc4b0aa2eede0694a89882e51e
      * Deze methode vult de tijdlijn en zorgt voor de format
      */
     private void fillTimeline() {

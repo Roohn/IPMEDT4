@@ -24,9 +24,9 @@ public class RekStrekActivity extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.textTitel);
 
         //arrays voor elke oefening
-        int[] rekstrekoefeningenafbeeldingen = {R.drawable.animatie_side_oefening02};
-        String[] rekstrekoefeningentitle = {"Pak je tenen"};
-        String[] rekstrekoefeningentext = {"Herhaal deze oefening 10 keer per voet."};
+        int[] rekstrekoefeningenafbeeldingen = {R.drawable.animatie_side_oefening02, R.drawable.animatie_side_oefening03};
+        String[] rekstrekoefeningentitle = {"Pak je tenen", "Sta tegen de muur en doe je been achteruit"};
+        String[] rekstrekoefeningentext = {"Herhaal deze oefening 10 keer per voet.", "Herhaal 10 keer."};
 
         //Laat de volgende afbeelding zien
         if(index < rekstrekoefeningenafbeeldingen.length) {
