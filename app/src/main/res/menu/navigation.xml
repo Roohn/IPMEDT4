@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/cast"
+        android:icon="@drawable/controleicon"
         android:title="@string/title_dashboard"/>
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/running"
+        android:icon="@drawable/revalidatie"
         android:title="@string/title_notifications"/>
 
 </menu>

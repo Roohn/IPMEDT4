@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressBarCircle2 = (ProgressBar) findViewById(R.id.progressBarCircle_gips);
         textViewTime = (TextView) findViewById(R.id.textViewTime_gips);
         textViewTime2 = (TextView) findViewById(R.id.textViewTime);
-        imageViewReset = (ImageView) findViewById(R.id.imageViewReset);
         includeChange = (ViewFlipper)findViewById(R.id.vf);
         beginDatum = (TextView) findViewById(R.id.beginDatum);
         eindDatum = (TextView) findViewById(R.id.eindDatum);
