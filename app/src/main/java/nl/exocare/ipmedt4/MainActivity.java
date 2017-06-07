@@ -46,7 +46,8 @@ import static nl.exocare.ipmedt4.R.layout.activity_revalidatie;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private long timeCountInMilliSeconds = 1 * 60000;
+    private long timeCountInMilliSecondsControle = 1 * 60000;
+    private long timeCountInMilliSecondsRevalidatie = 1 * 60000;
 
     private enum TimerStatus {
         STARTED,
@@ -57,9 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ProgressBar progressBarCircle, progressBarCircle2, tijdlijn;
     private EditText editTextMinute;
-    private TextView textViewTime, beginDatum, eindDatum, controleDatum, revalidatieDatum, textViewTime2;
+    private TextView textViewTime, beginDatum, eindDatum, controleDatum, revalidatieDatum, textViewTime2, datumGipsBehandeling, datumControleBehandeling;
     private ImageView imageViewReset, imageViewStartStop, image;
     private CountDownTimer countDownTimer;
+    TimelineHandler timeline = null;
 
     private ViewFlipper includeChange;
 
@@ -74,8 +76,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // method call to initialize the views
         initViews();
-        // method call to initialize the listeners
-        initListeners();
+
+        //datums ophalen
+        try {
+            timeline = new TimelineHandler();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         //de bottom navigatie listener
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -92,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         this);
             }
         });
+
+        //Behandelingspagina datums goed zetten
+        fillBehandelingPagina();
     }
 
     /**
@@ -126,13 +136,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * method to initialize the views
      */
     private void initViews() {
+        datumGipsBehandeling = (TextView) findViewById(R.id.datum_gips);
+        datumControleBehandeling = (TextView) findViewById(R.id.datum_controle);
         progressBarCircle = (ProgressBar) findViewById(R.id.progressBarCircle);
         progressBarCircle2 = (ProgressBar) findViewById(R.id.progressBarCircle_gips);
-        editTextMinute = (EditText) findViewById(R.id.editTextMinute);
-        textViewTime = (TextView) findViewById(R.id.textViewTime);
-        textViewTime2 = (TextView) findViewById(R.id.textViewTime_gips);
-        imageViewReset = (ImageView) findViewById(R.id.imageViewReset);
-        imageViewStartStop = (ImageView) findViewById(R.id.imageViewStartStop);
+        textViewTime = (TextView) findViewById(R.id.textViewTime_gips);
+        textViewTime2 = (TextView) findViewById(R.id.textViewTime);
         includeChange = (ViewFlipper)findViewById(R.id.vf);
         beginDatum = (TextView) findViewById(R.id.beginDatum);
         eindDatum = (TextView) findViewById(R.id.eindDatum);
@@ -141,22 +150,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tijdlijn = (ProgressBar) findViewById(R.id.vertical_progressbar);
     }
 
-    /**
-     * method to initialize the click listeners
-     */
-    private void initListeners() {
-        imageViewReset.setOnClickListener(this);
-        imageViewStartStop.setOnClickListener(this);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imageViewReset:
-                reset();
-                break;
-            case R.id.imageViewStartStop:
-                startStop();
+            case R.id.buttonFaq:
+                Intent intent1 = new Intent(MainActivity.this, FaqActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.buttonStrek:
                 Intent intent2 = new Intent(MainActivity.this, RekStrekActivity.class);
@@ -170,110 +169,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * method to reset count down timer
-     */
-    private void reset() {
-        stopCountDownTimer();
-        startCountDownTimer();
-    }
-
-
-    /**
-     * method to start and stop count down timer
-     */
-    private void startStop() {
-        if (timerStatus == TimerStatus.STOPPED) {
-
-            // call to initialize the timer values
-            setTimerValues();
-            // call to initialize the progress bar values
-            setProgressBarValues();
-            // showing the reset icon
-            imageViewReset.setVisibility(View.VISIBLE);
-            // changing play icon to stop icon
-            imageViewStartStop.setImageResource(R.drawable.icon_stop);
-            // making edit text not editable
-            editTextMinute.setEnabled(false);
-            // changing the timer status to started
-            timerStatus = TimerStatus.STARTED;
-            // call to start the count down timer
-            startCountDownTimer();
-
-        } else {
-
-            // hiding the reset icon
-            imageViewReset.setVisibility(View.GONE);
-            // changing stop icon to start icon
-            imageViewStartStop.setImageResource(R.drawable.icon_start);
-            // making edit text editable
-            editTextMinute.setEnabled(true);
-            // changing the timer status to stopped
-            timerStatus = TimerStatus.STOPPED;
-            stopCountDownTimer();
-
-        }
-
-    }
-
-    /**
      * method to initialize the values for count down timer
      */
     private void setTimerValues() {
-        int time = 0;
-        if (!editTextMinute.getText().toString().isEmpty()) {
-            // fetching value from edit text and type cast to integer
-            time = Integer.parseInt(editTextMinute.getText().toString().trim());
-        } else {
-            // toast message to fill edit text
+        int timeControle = 0;
+        int timeRevalidatie = 0;
 
+        //uit de timelinehandler halen
+        try {
+            timeControle = (int) timeline.getTrajectduur(timeline.getCurrentTime(), timeline.getControleDatum());
+            timeControle = timeControle * 24 * 60;
+
+            timeRevalidatie = (int) timeline.getTrajectduur(timeline.getCurrentTime(), timeline.getRevalidatieDatum());
+            timeRevalidatie = timeRevalidatie * 24 * 60;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
         // assigning values after converting to milliseconds
-        timeCountInMilliSeconds = time * 60 * 1000;
+        timeCountInMilliSecondsControle = timeControle * 60 * 1000;
+        timeCountInMilliSecondsRevalidatie = timeRevalidatie * 60 * 1000;
     }
 
     /**
      * method to start count down timer
      */
     private void startCountDownTimer() {
+        //haal de goede tijd op
+        setTimerValues();
 
-        countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
+        countDownTimer = new CountDownTimer(timeCountInMilliSecondsControle, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
-                textViewTime2.setText(hmsTimeFormatter(millisUntilFinished));
-
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
-                progressBarCircle2.setProgress((int) (millisUntilFinished / 1000));
-
             }
 
             @Override
             public void onFinish() {
 
-                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
-                textViewTime2.setText(hmsTimeFormatter(timeCountInMilliSeconds));
+                textViewTime.setText("Klaar!");
                 // call to initialize the progress bar values
                 setProgressBarValues();
-                // hiding the reset icon
-                imageViewReset.setVisibility(View.GONE);
-                // changing stop icon to start icon
-                imageViewStartStop.setImageResource(R.drawable.icon_start);
-                // making edit text editable
-                editTextMinute.setEnabled(true);
-                // changing the timer status to stopped
-                timerStatus = TimerStatus.STOPPED;
             }
 
         }.start();
-        countDownTimer.start();
-    }
-
-    /**
-     * method to stop count down timer
-     */
-    private void stopCountDownTimer() {
-        countDownTimer.cancel();
     }
 
     /**
@@ -281,10 +221,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void setProgressBarValues() {
 
-        progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
-        progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
-        progressBarCircle2.setMax((int) timeCountInMilliSeconds / 1000);
-        progressBarCircle2.setProgress((int) timeCountInMilliSeconds / 1000);
+        progressBarCircle.setMax((int) timeCountInMilliSecondsControle / 1000);
+        progressBarCircle.setProgress((int) timeCountInMilliSecondsControle / 1000);
+        progressBarCircle2.setMax((int) timeCountInMilliSecondsRevalidatie / 1000);
+        progressBarCircle2.setProgress((int) timeCountInMilliSecondsRevalidatie / 1000);
     }
 
 
@@ -305,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
+<<<<<<< HEAD
      * Methodes voor de knoppen op de revalidatiepagina
      * 
      */
@@ -318,16 +259,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
+=======
+>>>>>>> 30b7448279048ccc4b0aa2eede0694a89882e51e
      * Deze methode vult de tijdlijn en zorgt voor de format
      */
     private void fillTimeline() {
-        TimelineHandler timeline = null;
-        try {
-            timeline = new TimelineHandler();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         //set de datums van begin en eind goed
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         beginDatum.setText(df.format(timeline.getBeginDatum()));
@@ -373,6 +309,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //hoofdafstand
         ConstraintLayout.LayoutParams hoofdParams = (ConstraintLayout.LayoutParams) hoofdLayout.getLayoutParams();
         hoofdParams.topMargin = afstandHoofd;
+    }
+
+    /**
+     * het goedzetten van de datums op de behandelingspagina
+     */
+    public void fillBehandelingPagina() {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        datumGipsBehandeling.setText(df.format(timeline.getControleDatum()));
+        datumControleBehandeling.setText(df.format(timeline.getRevalidatieDatum()));
+
+        //start timers
+        startCountDownTimer();
     }
 
     /**
