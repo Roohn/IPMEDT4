@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -13,6 +14,7 @@ import android.widget.ViewFlipper;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TimelineActivity extends AppCompatActivity {
     TimelineHandler timeline = null;
@@ -104,6 +106,33 @@ public class TimelineActivity extends AppCompatActivity {
         controleParams.topMargin = afstandControle;
         ConstraintLayout.LayoutParams revalidatieParams = (ConstraintLayout.LayoutParams) revalidatieLayout.getLayoutParams();
         revalidatieParams.topMargin = afstandRevalidatie;
+
+        //het disablen of enabelen van de secties
+        ImageView beginIcon = (ImageView) findViewById(R.id.beginIcon);
+        ImageView controleIcon = (ImageView) findViewById(R.id.controleIcon);
+        ImageView revalidatieIcon = (ImageView) findViewById(R.id.revalidatieIcon);
+        ConstraintLayout revalidatielayout = (ConstraintLayout) findViewById(R.id.revalidatieLayout);
+        ImageView eindIcon = (ImageView) findViewById(R.id.eindIcon);
+        ConstraintLayout eindLayout = (ConstraintLayout) findViewById(R.id.eindLayout);
+
+        Date nu = timeline.getCurrentTime();
+        //als je voorbij de revalidatie bent
+        if (nu.after(timeline.getRevalidatieDatum())) {
+            eindIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            eindIcon.setEnabled(false);
+        }
+        //als je voorbij de controle bent
+        else if (nu.after(timeline.getControleDatum())) {
+            revalidatieIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            eindIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            revalidatielayout.setOnClickListener(null);
+        }
+        //als je voorbij gips krijgen bent
+        else {
+            revalidatieIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            eindIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            revalidatielayout.setOnClickListener(null);
+        }
 
         //hoofdafstand
         ConstraintLayout.LayoutParams hoofdParams = (ConstraintLayout.LayoutParams) hoofdLayout.getLayoutParams();
