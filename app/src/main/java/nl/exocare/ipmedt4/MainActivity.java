@@ -158,10 +158,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageViewStartStop:
                 startStop();
                 break;
-            case R.id.buttonFaq:
-                Intent intent1 = new Intent(MainActivity.this, FaqActivity.class);
-                startActivity(intent1);
-                break;
             case R.id.buttonStrek:
                 Intent intent2 = new Intent(MainActivity.this, RekStrekActivity.class);
                 startActivity(intent2);
@@ -312,6 +308,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Methodes voor de knoppen op de revalidatiepagina
      * 
      */
+    protected void faqFunctie(View v){
+        Intent i = new Intent(this, FaqLijst.class);
+
+        i.putExtra("firstKeyName", "FirstKeyValue");
+        i.putExtra("secondKeyName", "SecondKeyValue");
+
+        startActivity(i);
+    }
 
     /**
      * Deze methode vult de tijdlijn en zorgt voor de format
