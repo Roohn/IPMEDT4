@@ -60,7 +60,7 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
-                android:onClick="faqFunctie"
+                android:onClick="onClick"
                 android:text="Veel voorkomende vragen"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
