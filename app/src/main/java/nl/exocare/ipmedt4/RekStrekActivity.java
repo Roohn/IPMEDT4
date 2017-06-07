@@ -22,10 +22,13 @@ public class RekStrekActivity extends AppCompatActivity {
         ImageView gifAfbeelding = (ImageView) findViewById(R.id.gif_afbeelding);
         TextView uitleg = (TextView) findViewById(R.id.textUitleg);
         TextView title = (TextView) findViewById(R.id.textTitel);
+
+        //arrays voor elke oefening
         int[] rekstrekoefeningenafbeeldingen = {R.drawable.animatie_side_oefening02};
         String[] rekstrekoefeningentitle = {"Pak je tenen"};
         String[] rekstrekoefeningentext = {"Herhaal deze oefening 10 keer per voet."};
 
+        //Laat de volgende afbeelding zien
         if(index < rekstrekoefeningenafbeeldingen.length) {
             gifAfbeelding.setImageResource(rekstrekoefeningenafbeeldingen[index]);
             title.setText(rekstrekoefeningentitle[index]);
@@ -33,6 +36,8 @@ public class RekStrekActivity extends AppCompatActivity {
 
             index++;
         }
+
+        //als er geen oefeningen meer zijn dan de knop weghalen
         if(index == rekstrekoefeningenafbeeldingen.length) {
             Button buttonNext = (Button) findViewById(R.id.buttonNext);
             buttonNext.setVisibility(View.INVISIBLE);
