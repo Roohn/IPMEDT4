@@ -37,7 +37,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Tijd tot behandeling"
+            android:text="Tijd tot begin revalidatie"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -73,7 +73,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Controle"
+            android:text="Revalidatie"
             android:textColor="#ffffff"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
@@ -84,7 +84,7 @@
             app:layout_constraintVertical_bias="0.797" />
 
         <TextView
-            android:id="@+id/textViewTime_gips"
+            android:id="@+id/textViewTime_revalidatie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -94,14 +94,14 @@
             android:layout_marginTop="8dp"
             android:text="00d\n00u\n00m"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBarCircle_gips"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBarCircle_revalidatie"
             app:layout_constraintHorizontal_bias="0.54"
-            app:layout_constraintLeft_toLeftOf="@+id/progressBarCircle_gips"
-            app:layout_constraintRight_toRightOf="@+id/progressBarCircle_gips"
-            app:layout_constraintTop_toTopOf="@+id/progressBarCircle_gips" />
+            app:layout_constraintLeft_toLeftOf="@+id/progressBarCircle_revalidatie"
+            app:layout_constraintRight_toRightOf="@+id/progressBarCircle_revalidatie"
+            app:layout_constraintTop_toTopOf="@+id/progressBarCircle_revalidatie" />
 
         <ProgressBar
-            android:id="@+id/progressBarCircle_gips"
+            android:id="@+id/progressBarCircle_revalidatie"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="124dp"
             android:layout_height="105dp"
@@ -146,7 +146,7 @@
             android:layout_marginTop="15dp"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:text="Om 14:30 uur een controle afspraak met dokter vd Berg.\n\nMelden bij de balie van afdeling C"
+            android:text="Na deze datum kan je je oefeningen gaan doen \n\n De oefeningen verschijnen op deze pagina"
             android:textAlignment="center"
             app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintLeft_toLeftOf="parent"
