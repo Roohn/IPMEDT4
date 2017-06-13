@@ -107,6 +107,38 @@ public class TimelineActivity extends AppCompatActivity {
         ConstraintLayout.LayoutParams revalidatieParams = (ConstraintLayout.LayoutParams) revalidatieLayout.getLayoutParams();
         revalidatieParams.topMargin = afstandRevalidatie;
 
+        //het goed zetten van de "in ... dagen"
+        TextView beginDagen = (TextView) findViewById(R.id.beginDagen);
+        TextView controleDagen = (TextView) findViewById(R.id.controleDagen);
+        TextView revalidatieDagen = (TextView) findViewById(R.id.revalidatieDagen);
+        TextView eindDagen = (TextView) findViewById(R.id.eindDagen);
+        long totBegin = 0;
+        long totControle = 0;
+        long totRevalidatie = 0;
+        long totEind = 0;
+
+        try {
+            totBegin = timeline.getTrajectduur(timeline.getCurrentTime(), timeline.getBeginDatum());
+            totControle = timeline.getTrajectduur(timeline.getCurrentTime(), timeline.getControleDatum());
+            totRevalidatie = timeline.getTrajectduur(timeline.getCurrentTime(), timeline.getRevalidatieDatum());
+            totEind = timeline.getTrajectduur(timeline.getCurrentTime(), timeline.getEindDatum());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (totBegin > 0) {
+            beginDagen.setText("in " + totBegin + " dagen");
+        }
+        if (totControle > 0) {
+            controleDagen.setText("in " + totControle + " dagen");
+        }
+        if (totRevalidatie > 0) {
+            revalidatieDagen.setText("in " + totRevalidatie + " dagen");
+        }
+        if (totEind > 0) {
+            eindDagen.setText("in " + totEind + " dagen");
+        }
+
+
         //het disablen of enabelen van de secties
         ImageView beginIcon = (ImageView) findViewById(R.id.beginIcon);
         ImageView controleIcon = (ImageView) findViewById(R.id.controleIcon);
@@ -123,9 +155,7 @@ public class TimelineActivity extends AppCompatActivity {
         }
         //als je voorbij de controle bent
         else if (nu.after(timeline.getControleDatum())) {
-            revalidatieIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
             eindIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
-            revalidatielayout.setOnClickListener(null);
         }
         //als je voorbij gips krijgen bent
         else {
