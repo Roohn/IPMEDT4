@@ -14,7 +14,7 @@ public class RevalidatieActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonFaq:
-                Intent intent1 = new Intent(this, FaqActivity.class);
+                Intent intent1 = new Intent(this, FaqLijst.class);
                 startActivity(intent1);
                 break;
             case R.id.buttonStrek:
