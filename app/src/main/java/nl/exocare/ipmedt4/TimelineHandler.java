@@ -11,9 +11,9 @@ public class TimelineHandler {
 
     public TimelineHandler() throws ParseException {
         String beginDatum = "01 05 2017";
-        String eindDatum = "19 08 2017";
-        String controleDatum = "07 06 2017";
-        String revalidatieDatum = "11 07 2017";
+        String controleDatum = "15 05 2017";
+        String revalidatieDatum = "11 06 2017";
+        String eindDatum = "19 07 2017";
 
         SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
         this.dateBegin = myFormat.parse(beginDatum);

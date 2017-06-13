@@ -175,8 +175,16 @@ public class TimelineActivity extends AppCompatActivity {
      * @param v
      */
     public void clickRevalidatie(View v){
-        Intent intent = new Intent(this, RevalidatieActivity.class);
-        startActivity(intent);
+        //als revalidatie nog niet begonnen is dan doorsturen naar de countdown
+        if(timeline.getRevalidatieDatum().getTime() > timeline.getCurrentTime().getTime()) {
+            Intent intent = new Intent(this, RevalidatieControleActivity.class);
+            startActivity(intent);
+        }
+        //anders doorsturen naar de revalidatie oefeningen
+        else {
+            Intent intent = new Intent(this, RevalidatieActivity.class);
+            startActivity(intent);
+        }
     }
 
     /**

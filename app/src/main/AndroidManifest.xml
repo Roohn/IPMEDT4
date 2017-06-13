@@ -24,6 +24,10 @@
             android:label="@string/app_name">
         </activity>
         <activity
+            android:name=".RevalidatieControleActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
             android:name=".ControleActivity"
             android:label="@string/app_name">
         </activity>
