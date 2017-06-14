@@ -88,12 +88,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         if(task.isSuccessful()) {
                             //succesvol geregistreerd
                             Toast.makeText(RegisterActivity.this, "Succesvol geregistreerd " + name + "!", Toast.LENGTH_LONG).show();
-                            progressDialog.hide();
+                            progressDialog.dismiss();
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
                         }else{
                             Toast.makeText(RegisterActivity.this, "Registratie mislukt, probeer opnieuw.", Toast.LENGTH_SHORT).show();
-                            progressDialog.hide();
+                            progressDialog.dismiss();
                         }
                     }
                 });
