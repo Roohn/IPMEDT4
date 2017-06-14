@@ -19,7 +19,7 @@ public class FaqLijst extends AppCompatActivity{
         ListView lv = (ListView) findViewById(R.id.faqLijst);
 
         Vragen[] lijstjeVragen = new Vragen [3];
-        lijstjeVragen[0] = new Vragen("Hoort het te jeuken onder mijn gips?", "Ja.");
+        lijstjeVragen[0] = new Vragen("Hoort het te jeuken onder mijn gips?", "Ja, dat is een veelvoorkomende irritatie bij patiënten met gips.");
         lijstjeVragen[1] = new Vragen("Hoe lang duurt het voordat ik alles weer normaal kan doen?", "Volledig normaal en pijnvrij gebruik van het been kan al gauw 3-6 maanden of soms nog langer duren.");
         lijstjeVragen[2] = new Vragen("Waarom moet ik oefeningen doen met mijn been?", "Omdat spieren snel verslappen na een botbreuk en daardoor opnieuw getraind moeten worden.");
 
