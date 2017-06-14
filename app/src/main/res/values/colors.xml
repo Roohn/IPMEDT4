@@ -6,7 +6,7 @@
     <color name="colorPrimaryOverlay">#647f2e2e</color>
     <color name="colorNavbar">#b74343</color>
 
-    <color name="checked">#FFFFFF</color>
+    <color name="checked">#ffffff</color>
     <color name="default_color">#ffffff</color>
 </resources>
 

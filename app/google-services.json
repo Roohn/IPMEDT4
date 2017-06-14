@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "943509992371",
+    "firebase_url": "https://exocare-1c0e2.firebaseio.com",
+    "project_id": "exocare-1c0e2",
+    "storage_bucket": "exocare-1c0e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943509992371:android:8b1150def30438f8",
+        "android_client_info": {
+          "package_name": "nl.exocare.ipmedt4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943509992371-fo0sosdbgm9ctesai2p42br48jcom4ig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUf5ryMsU6Qjld6Hts_3tZengZldySlNI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
