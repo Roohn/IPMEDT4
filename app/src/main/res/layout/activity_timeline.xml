@@ -30,18 +30,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp">
 
         <TextView
             android:id="@+id/beginDagen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="8dp"
             android:text="Klaar!"
             android:textColor="@android:color/white"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/beginText" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/beginDatum"
@@ -49,12 +50,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="0dp"
             android:text="06-07-2017"
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/beginDagen" />
+            app:layout_constraintTop_toBottomOf="@+id/beginDagen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/beginText"
@@ -64,10 +67,13 @@
             android:layout_marginStart="42dp"
             android:text="Gips Gekregen"
             android:textColor="@color/default_color"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/beginIcon"
-            app:layout_constraintTop_toTopOf="@+id/beginIcon" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:id="@+id/beginIcon"
@@ -75,21 +81,26 @@
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/backgroundrounded"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/broken" />
+            app:srcCompat="@drawable/broken"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:id="@+id/beginIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/backgroundrounded"
-            app:layout_constraintTop_toTopOf="@+id/beginText"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/beginText"
             android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -108,12 +119,12 @@
             android:id="@+id/controleDagen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginRight="39dp"
+            android:layout_marginTop="8dp"
             android:text="Klaar!"
             android:textColor="@android:color/white"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/controleText" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/controleDatum"
@@ -126,7 +137,9 @@
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/controleDagen"
-            android:layout_marginTop="0dp" />
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/controleText"
@@ -136,10 +149,13 @@
             android:layout_marginStart="42dp"
             android:text="Controle Afspraak"
             android:textColor="@color/default_color"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/controleIcon"
-            app:layout_constraintTop_toTopOf="@+id/controleIcon" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:id="@+id/controleIcon"
@@ -147,7 +163,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/backgroundrounded"
             android:padding="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -162,18 +178,21 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/backgroundrounded"
             app:layout_constraintRight_toLeftOf="@+id/controleText"
-            app:layout_constraintTop_toTopOf="@+id/controleText" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:srcCompat="@drawable/ic_keyboard_arrow_right_white_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp" />
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_white_36dp" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -193,11 +212,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="8dp"
             android:text="Klaar!"
             android:textColor="@android:color/white"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/revalidatieText" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/revalidatieDatum"
@@ -209,7 +228,10 @@
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/revalidatieDagen" />
+            app:layout_constraintTop_toBottomOf="@+id/revalidatieDagen"
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/revalidatieText"
@@ -219,10 +241,13 @@
             android:layout_marginStart="42dp"
             android:text="Begin Revalidatie"
             android:textColor="@color/default_color"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/revalidatieIcon"
-            app:layout_constraintTop_toTopOf="@+id/revalidatieIcon" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:id="@+id/revalidatieIcon"
@@ -230,12 +255,14 @@
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/backgroundrounded"
             android:padding="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/revalidatie" />
+            app:srcCompat="@drawable/revalidatie"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:id="@+id/revalidatieIndicator"
@@ -245,18 +272,21 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/backgroundrounded"
             app:layout_constraintRight_toLeftOf="@+id/revalidatieText"
-            app:layout_constraintTop_toTopOf="@+id/revalidatieText" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:srcCompat="@drawable/ic_keyboard_arrow_right_white_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp" />
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_white_36dp" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -264,7 +294,7 @@
         android:id="@+id/eindLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -275,11 +305,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="8dp"
             android:text="Klaar!"
             android:textColor="@android:color/white"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/eindText" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/eindDatum"
@@ -291,20 +321,26 @@
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eindDagen"
-            android:layout_marginEnd="40dp" />
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/eindText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="42dp"
+            android:layout_marginStart="42dp"
             android:text="Einde Revalidatie"
             android:textColor="@color/default_color"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/eindIcon"
-            app:layout_constraintTop_toTopOf="@+id/eindIcon"
-            android:layout_marginStart="42dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:id="@+id/eindIcon"
@@ -312,22 +348,27 @@
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/backgroundrounded"
             android:padding="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/running" />
+            app:srcCompat="@drawable/running"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <ImageView
             android:id="@+id/eindIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/backgroundrounded"
-            app:layout_constraintTop_toTopOf="@+id/eindText"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/eindText"
             android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout

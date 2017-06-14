@@ -140,27 +140,28 @@ public class TimelineActivity extends AppCompatActivity {
 
 
         //het disablen of enabelen van de secties
-        ImageView beginIcon = (ImageView) findViewById(R.id.beginIcon);
-        ImageView controleIcon = (ImageView) findViewById(R.id.controleIcon);
         ImageView revalidatieIcon = (ImageView) findViewById(R.id.revalidatieIcon);
         ConstraintLayout revalidatielayout = (ConstraintLayout) findViewById(R.id.revalidatieLayout);
         ImageView eindIcon = (ImageView) findViewById(R.id.eindIcon);
-        ConstraintLayout eindLayout = (ConstraintLayout) findViewById(R.id.eindLayout);
+        TextView eindText = (TextView) findViewById(R.id.eindText);
 
         Date nu = timeline.getCurrentTime();
         //als je voorbij de revalidatie bent
         if (nu.after(timeline.getRevalidatieDatum())) {
             eindIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            eindText.setTextColor(getResources().getColor(R.color.disabled));
             eindIcon.setEnabled(false);
         }
         //als je voorbij de controle bent
         else if (nu.after(timeline.getControleDatum())) {
             eindIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            eindText.setTextColor(getResources().getColor(R.color.disabled));
         }
         //als je voorbij gips krijgen bent
         else {
             revalidatieIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
             eindIcon.setBackgroundDrawable(getResources().getDrawable(R.drawable.backgroundrounded_disabled));
+            eindText.setTextColor(getResources().getColor(R.color.disabled));
             revalidatielayout.setOnClickListener(null);
         }
 

@@ -8,5 +8,6 @@
 
     <color name="checked">#ffffff</color>
     <color name="default_color">#ffffff</color>
+    <color name="disabled">@android:color/darker_gray</color>
 </resources>
 
