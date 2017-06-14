@@ -1,5 +1,6 @@
 package nl.exocare.ipmedt4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 public class RekStrekActivity extends AppCompatActivity {
     private int index;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +20,7 @@ public class RekStrekActivity extends AppCompatActivity {
 
         index = 0;
     }
+
 
     public void volgendeOefening(View v) {
         ImageView gifAfbeelding = (ImageView) findViewById(R.id.gif_afbeelding);
@@ -42,5 +46,6 @@ public class RekStrekActivity extends AppCompatActivity {
             Button buttonNext = (Button) findViewById(R.id.buttonNext);
             buttonNext.setVisibility(View.INVISIBLE);
         }
+
     }
 }

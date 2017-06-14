@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nl.exocare.ipmedt4">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".TimelineActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -21,32 +23,31 @@
         </activity>
         <activity
             android:name=".RevalidatieActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".RevalidatieControleActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".ControleActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".RekStrekActivity"
-            android:label="@string/app_name">
-
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".FaqLijst"
-            android:label="@string/app_name">
-
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".KrachtActivity"
-            android:label="@string/app_name">
-
-        </activity>
-
+            android:label="@string/app_name" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".Home"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".TimelineActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

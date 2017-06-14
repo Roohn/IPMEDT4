@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context="nl.exocare.ipmedt4.LoginActivity"
+
+    >
+
+
+    <Button
+        android:id="@+id/bLogin"
+        android:layout_width="316dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border"
+        android:text="LOG IN"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        app:layout_constraintHorizontal_bias="0.494" />
+    <!-- email -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="316dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="#40FFFFFF"
+        android:ems="10"
+        android:fontFamily="fonts/Ubuntu-R.ttf"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="#CCFFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="44dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+    <!-- wachtwoord -->
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="316dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="#40FFFFFF"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="Wachtwoord"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColorHint="#CCFFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Wachtwoord vergeten?"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Wachtwoord vergeten?"
+        android:layout_marginTop="19dp"
+        app:layout_constraintTop_toBottomOf="@+id/bLogin"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="149dp"
+        android:layout_height="37dp"
+        app:srcCompat="@drawable/exocare_white"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="46dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="57dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OF"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.762"
+        app:layout_constraintHorizontal_bias="0.498" />
+    <!--linker streepje bij OF-->
+    <View
+        android:layout_width="125dp"
+        android:layout_height="5dp"
+        android:background="#40FFFFFF"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/textView5"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.753" />
+    <!--rechter streepje bij OF -->
+    <View
+        android:layout_width="125dp"
+        android:layout_height="5dp"
+        android:background="#40FFFFFF"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/textView5"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="0.64"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.755" />
+
+    <Button
+        android:id="@+id/bRegisterLink"
+        android:layout_width="318dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#40FFFFFF"
+        android:text="Nog geen account? Registreer hier."
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteY="495dp" />
+
+</android.support.constraint.ConstraintLayout>
