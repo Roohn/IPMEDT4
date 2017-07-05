@@ -11,6 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +24,8 @@ public class TimelineActivity extends AppCompatActivity {
     TextView beginDatum, eindDatum, controleDatum, revalidatieDatum;
     ProgressBar tijdlijn;
 
+    FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,14 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+       /* if(firebaseAuth.getCurrentUser() == null){
+            //Als account al is ingelogd
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }*/
         // method call to initialize the views
         initViews();
 

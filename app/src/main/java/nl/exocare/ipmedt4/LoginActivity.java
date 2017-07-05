@@ -38,10 +38,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-          /*  if(firebaseAuth.getCurrentUser() != null){
+           /*if(firebaseAuth.getCurrentUser() != null){
                 //Als account al is ingelogd
-
-                startActivity(new Intent(getApplicationContext(), Home.class));
+                finish();
+                startActivity(new Intent(getApplicationContext(), TimelineActivity.class));
             }*/
 
         tvForgottenPass = (TextView) findViewById(R.id.tvForgottenPass);
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if(view ==tvForgottenPass){
             //wachtwoord vergeten scherm hier
-            Toast.makeText(this, "Dit komt er nog aan... rustig man jemig STOP", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
         }
     }
 }

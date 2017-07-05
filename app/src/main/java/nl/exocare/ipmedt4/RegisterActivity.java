@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.sql.Time;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etMail;
@@ -36,10 +38,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         firebaseAuth = FirebaseAuth.getInstance();
-      /*  if(firebaseAuth.getCurrentUser() != null){
+        /*if(firebaseAuth.getCurrentUser() == null){
             //Als account al is ingelogd
             finish();
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            startActivity(new Intent(getApplicationContext(), TimelineActivity.class));
         }*/
 
         progressDialog = new ProgressDialog(this);
