@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser(){
-        String email = etMail.getText().toString().trim();
+        final String email = etMail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         final String name = etName.getText().toString().trim();
         //benodigdheden voor inloggen
@@ -91,7 +91,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             //succesvol geregistreerd
                             Toast.makeText(RegisterActivity.this, "Succesvol geregistreerd " + name + "!", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(), AfsprakenActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), AfsprakenActivity.class);
+                            intent.putExtra("user", name);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
 
                         }else{
                             Toast.makeText(RegisterActivity.this, "Registratie mislukt, probeer opnieuw.", Toast.LENGTH_SHORT).show();

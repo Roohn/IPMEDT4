@@ -2,10 +2,12 @@ package nl.exocare.ipmedt4;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +19,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -57,8 +74,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvForgottenPass.setOnClickListener(this);
     }
     public void init() {
-                Intent intent1 = new Intent(LoginActivity.this, TimelineActivity.class);
-                startActivity(intent1);
+        Intent intent1 = new Intent(LoginActivity.this, TimelineActivity.class);
+        intent1.putExtra("mail", etMail.getText().toString().trim());
+        Log.d("mail", ""+etMail.getText().toString().trim());
+        startActivity(intent1);
     }
     public void init2() {
         Toast.makeText(this, "Verkeerde combinatie email en wachtwoord", Toast.LENGTH_SHORT).show();

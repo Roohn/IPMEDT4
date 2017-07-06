@@ -41,7 +41,7 @@
                     android:id="@+id/input_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Datum"
+                    android:hint="Datum (YYYY-MM-DD)"
                     android:inputType="date" />
             </android.support.design.widget.TextInputLayout>
 
@@ -84,7 +84,7 @@
             android:layout_marginTop="8dp">
 
             <EditText
-                android:id="@+id/input_dokter"
+                android:id="@+id/input_locatie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Locatie"

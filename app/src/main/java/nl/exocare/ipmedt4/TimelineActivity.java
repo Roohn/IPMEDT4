@@ -1,9 +1,11 @@
 package nl.exocare.ipmedt4;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -13,9 +15,22 @@ import android.widget.ViewFlipper;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class TimelineActivity extends AppCompatActivity {
@@ -32,7 +47,8 @@ public class TimelineActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-
+        Intent intent = getIntent();
+        String mail = intent.getStringExtra("mail");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -44,24 +60,9 @@ public class TimelineActivity extends AppCompatActivity {
         // method call to initialize the views
         initViews();
 
-        //datums ophalen
-        try {
-            timeline = new TimelineHandler();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        //hoogte en breedte van het scherm bepalen en tijdlijn vullen
-        ViewTreeObserver observer = timelineLayout.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-            @Override
-            public void onGlobalLayout() {
-                fillTimeline();
-                timelineLayout.getViewTreeObserver().removeGlobalOnLayoutListener(
-                        this);
-            }
-        });
+        //get controledatum van api
+        getControleDatums getDatums = new getControleDatums(mail);
+        getDatums.execute();
     }
 
     private void initViews() {
@@ -208,6 +209,139 @@ public class TimelineActivity extends AppCompatActivity {
     public void clickControle(View v){
         Intent intent = new Intent(this, ControleActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Haal de juiste datums op vanuit de api
+     */
+    public class getControleDatums extends AsyncTask<URL, Void, ArrayList<TimelineHandler>> {
+        /** URL om de modules te laden */
+        private String API_URL = "http://project.ronaldtoldevelopment.nl/api/controles";
+        public String LOG_TAG = LoginActivity.class.getSimpleName();
+
+        //constructor
+        public getControleDatums(String user) {
+            this.API_URL = API_URL + "/" + user;
+        }
+
+        @Override
+        protected ArrayList<TimelineHandler> doInBackground(URL... urls) {
+            // Create URL object
+            URL url = createUrl(API_URL);
+
+            // Perform HTTP request to the URL and receive a JSON response back
+            String jsonResponse = "";
+            try {
+                jsonResponse = makeHttpRequest(url);
+            } catch (IOException e) {
+                // TODO Handle the IOException
+            }
+
+            // Extract relevant fields from the JSON response and create an {@link Event} object
+            Log.d(LOG_TAG, ""+jsonResponse);
+            ArrayList<TimelineHandler> datums = extractDatesFromJson(jsonResponse);
+
+            // Return the {@link Event} object as the result of the {@link ModulesAsyncTask}
+            return datums;
+        }
+
+        /**
+         * Update the screen with the given modules
+         */
+        @Override
+        protected void onPostExecute(ArrayList<TimelineHandler> controle) {
+            if (controle == null) {
+                return;
+            }
+
+            //set datum
+            timeline = controle.get(0);
+            fillTimeline();
+        }
+
+        /**
+         * Returns new URL object from the given string URL.
+         */
+        private URL createUrl(String stringUrl) {
+            URL url = null;
+            try {
+                url = new URL(stringUrl);
+            } catch (MalformedURLException exception) {
+                Log.e(LOG_TAG, "Error with creating URL", exception);
+                return null;
+            }
+            return url;
+        }
+
+        /**
+         * Make an HTTP request to the given URL and return a String as the response.
+         */
+        private String makeHttpRequest(URL url) throws IOException {
+            String jsonResponse = "";
+            HttpURLConnection urlConnection = null;
+            InputStream inputStream = null;
+            try {
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setReadTimeout(10000 /* milliseconds */);
+                urlConnection.setConnectTimeout(15000 /* milliseconds */);
+                urlConnection.connect();
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+            } catch (IOException e) {
+                // TODO: Handle the exception
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            }
+            return jsonResponse;
+        }
+
+        /**
+         * Convert the {@link InputStream} into a String which contains the
+         * whole JSON response from the server.
+         */
+        private String readFromStream(InputStream inputStream) throws IOException {
+            StringBuilder output = new StringBuilder();
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                BufferedReader reader = new BufferedReader(inputStreamReader);
+                String line = reader.readLine();
+                while (line != null) {
+                    output.append(line);
+                    line = reader.readLine();
+                }
+            }
+            return output.toString();
+        }
+
+        /**
+         * Maak een modules arraylist aan met alle vakken erin
+         */
+        private ArrayList<TimelineHandler> extractDatesFromJson(String datesJSON) {
+            try {
+                JSONObject jsonResponseArray = new JSONObject(datesJSON);
+                ArrayList<TimelineHandler> controles = new ArrayList<>();
+
+
+                // If there are results in the features array
+                if (jsonResponseArray.length() > 0) {
+                    String tijd = jsonResponseArray.getString("tijd");
+                    controles.add(new TimelineHandler(tijd));
+                }
+                return controles;
+
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Problem parsing the modules JSON results", e);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
 }
