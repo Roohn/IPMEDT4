@@ -85,9 +85,6 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
         Intent intent2 = getIntent();
         mail = intent2.getStringExtra("mail");
 
-    getAllWidgetReference();
-    bindWidgetWithAnEvent();
-
         // method call to initialize the views
         initViews();
 
@@ -102,8 +99,8 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
         registerReceiver(receiver, filter);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,13);
-        calendar.set(Calendar.MINUTE,04);
+        calendar.set(Calendar.HOUR_OF_DAY,19);
+        calendar.set(Calendar.MINUTE,20);
 
 
         Intent intent = new Intent("ALARM_ACTION");
@@ -118,16 +115,6 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void getAllWidgetReference() {
-        btnMainSendNotificationActionBtn = (Button) findViewById(R.id.btnMainSendNotificationActionBtn);
-
-        notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        icon = BitmapFactory.decodeResource(this.getResources(),
-                R.mipmap.ic_launcher);
-    }
-
-
     private void bindWidgetWithAnEvent() {
         btnMainSendNotificationActionBtn.setOnClickListener((View.OnClickListener) this);
     }
@@ -135,13 +122,6 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
 
     public void onClick(View v) {
         setNotificationData();
-
-        switch (v.getId()) {
-            case R.id.btnMainSendNotificationActionBtn:
-                setDataForNotificationWithActionButton();
-                break;
-        }
-
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
@@ -177,8 +157,8 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
         /* Set the alarm to start at 10:30 AM */
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 32);
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 11);
 
         /* Repeating on every 20 minutes interval */
         manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
