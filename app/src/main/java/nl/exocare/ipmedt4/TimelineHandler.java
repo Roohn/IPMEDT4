@@ -1,5 +1,8 @@
 package nl.exocare.ipmedt4;
 
+import android.text.format.DateFormat;
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,11 +12,14 @@ import java.util.concurrent.TimeUnit;
 public class TimelineHandler {
     Date dateBegin, dateEind, dateControle, dateRevalidatie;
 
-    public TimelineHandler() throws ParseException {
+    public TimelineHandler(String tijd) throws ParseException {
+        String[] separated = tijd.split("-");
+        Log.d("datum", ""+ separated[0]);
+
         String beginDatum = "01 05 2017";
-        String controleDatum = "15 05 2017";
         String revalidatieDatum = "11 06 2017";
         String eindDatum = "19 07 2017";
+        String controleDatum = separated[2].substring(0, 2) + " " + separated[1] + " " + separated[0];
 
         SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
         this.dateBegin = myFormat.parse(beginDatum);
@@ -21,6 +27,8 @@ public class TimelineHandler {
         this.dateControle = myFormat.parse(controleDatum);
         this.dateRevalidatie = myFormat.parse(revalidatieDatum);
     }
+
+    public TimelineHandler() throws ParseException{};
 
     public Date getBeginDatum() {
         return dateBegin;

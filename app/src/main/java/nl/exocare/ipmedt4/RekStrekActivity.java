@@ -8,8 +8,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class RekStrekActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+
+public class RekStrekActivity extends AppCompatActivity{
     private int index;
+
 
 
 
@@ -19,6 +22,7 @@ public class RekStrekActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rekstrek);
 
         index = 0;
+
     }
 
 
@@ -48,4 +52,5 @@ public class RekStrekActivity extends AppCompatActivity {
         }
 
     }
+
 }

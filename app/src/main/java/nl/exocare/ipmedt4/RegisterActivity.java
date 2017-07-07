@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.sql.Time;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etMail;
@@ -36,10 +38,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         firebaseAuth = FirebaseAuth.getInstance();
-      /*  if(firebaseAuth.getCurrentUser() != null){
+        /*if(firebaseAuth.getCurrentUser() == null){
             //Als account al is ingelogd
             finish();
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            startActivity(new Intent(getApplicationContext(), TimelineActivity.class));
         }*/
 
         progressDialog = new ProgressDialog(this);
@@ -55,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser(){
-        String email = etMail.getText().toString().trim();
+        final String email = etMail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         final String name = etName.getText().toString().trim();
         //benodigdheden voor inloggen
@@ -89,7 +91,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             //succesvol geregistreerd
                             Toast.makeText(RegisterActivity.this, "Succesvol geregistreerd " + name + "!", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), AfsprakenActivity.class);
+                            intent.putExtra("user", name);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
 
                         }else{
                             Toast.makeText(RegisterActivity.this, "Registratie mislukt, probeer opnieuw.", Toast.LENGTH_SHORT).show();

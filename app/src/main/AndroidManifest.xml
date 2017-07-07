@@ -1,59 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nl.exocare.ipmedt4">
+package="nl.exocare.ipmedt4">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.INTERNET" />
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
 
-        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-        <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>﻿
-        <receiver android:name=".AlarmReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
-        <activity
-            android:name=".TimelineActivity"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>﻿
+    <receiver android:name=".AlarmReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        </intent-filter>
+    </receiver>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".RevalidatieActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".RevalidatieControleActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ControleActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".RekStrekActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".FaqLijst"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".KrachtActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".Home"
-            android:label="@string/app_name" />
+         <activity
+        android:name=".LoginActivity"
+        android:label="@string/app_name">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-    </application>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity
+        android:name=".RevalidatieActivity"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".RevalidatieControleActivity"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".ControleActivity"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".RekStrekActivity"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".FaqLijst"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".KrachtActivity"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".RegisterActivity"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".Home"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".TimelineActivity"
+        android:label="@string/app_name" />
+
+    <activity
+        android:name=".Samenvatting"
+        android:label="Exocare"/>
+
+    <activity android:name=".AfsprakenActivity"
+        android:label="Exocare"/>
+</application>
 
 </manifest>
