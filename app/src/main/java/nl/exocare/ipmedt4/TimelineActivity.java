@@ -1,6 +1,8 @@
 package nl.exocare.ipmedt4;
 
+import android.app.AlarmManager;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,18 +11,45 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
-public class TimelineActivity extends AppCompatActivity {
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class TimelineActivity extends AppCompatActivity implements View.OnClickListener {
     TimelineHandler timeline = null;
     ConstraintLayout timelineLayout;
     TextView beginDatum, eindDatum, controleDatum, revalidatieDatum;
     ProgressBar tijdlijn;
+    private int currentNotificationID = 0;
+    private EditText etMainNotificationText, etMainNotificationTitle;
+    private Button btnMainSendNotificationActionBtn, btnMainSendMaxPriorityNotification;
+    private NotificationManager notificationManager;
+    private NotificationCompat.Builder notificationBuilder;
+    private String notificationTitle;
+    private String notificationText;
+    private Bitmap icon;
+    private int combinedNotificationCounter;
+    private PendingIntent pendingIntent;
 
 
     @Override
@@ -28,6 +57,9 @@ public class TimelineActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+    getAllWidgetReference();
+    bindWidgetWithAnEvent();
 
         // method call to initialize the views
         initViews();
@@ -38,19 +70,137 @@ public class TimelineActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        AlarmManager alarms = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
 
-        //hoogte en breedte van het scherm bepalen en tijdlijn vullen
-        ViewTreeObserver observer = timelineLayout.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        Receiver receiver = new Receiver();
+        IntentFilter filter = new IntentFilter("ALARM_ACTION");
+        registerReceiver(receiver, filter);
 
-            @Override
-            public void onGlobalLayout() {
-                fillTimeline();
-                timelineLayout.getViewTreeObserver().removeGlobalOnLayoutListener(
-                        this);
-            }
-        });
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,13);
+        calendar.set(Calendar.MINUTE,04);
+
+
+        Intent intent = new Intent("ALARM_ACTION");
+        intent.putExtra("param", "My scheduled action");
+        PendingIntent operation = PendingIntent.getBroadcast(this, 0, intent, 0);
+        Intent myIntent;
+        PendingIntent pendingIntent;
+        // I choose 3s after the launch of my application
+        myIntent = new Intent(TimelineActivity.this,Receiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
+        alarms.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), operation) ;
+
+
+
     }
+
+
+    private void getAllWidgetReference() {
+        btnMainSendNotificationActionBtn = (Button) findViewById(R.id.btnMainSendNotificationActionBtn);
+
+        notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        icon = BitmapFactory.decodeResource(this.getResources(),
+                R.mipmap.ic_launcher);
+    }
+
+
+    private void bindWidgetWithAnEvent() {
+        btnMainSendNotificationActionBtn.setOnClickListener((View.OnClickListener) this);
+    }
+
+
+    public void onClick(View v) {
+        setNotificationData();
+
+        switch (v.getId()) {
+            case R.id.btnMainSendNotificationActionBtn:
+                setDataForNotificationWithActionButton();
+                break;
+        }
+
+    }
+
+    private void sendNotification() {
+        Intent notificationIntent = new Intent(this, TimelineActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        notificationBuilder.setContentIntent(contentIntent);
+        Notification notification = notificationBuilder.build();
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        notification.defaults |= Notification.DEFAULT_SOUND;
+
+        currentNotificationID++;
+        int notificationId = currentNotificationID;
+        if (notificationId == Integer.MAX_VALUE - 1)
+            notificationId = 0;
+
+        notificationManager.notify(notificationId, notification);
+    }
+
+    private void setNotificationData() {
+        notificationTitle = "RevalidatieOefeningen";
+        notificationText = "Heb je je oefeningen al gedaan?";
+    }
+
+
+    private void setDataForNotificationWithActionButton() {
+
+
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 1000 * 60 * 20;
+
+        /* Set the alarm to start at 10:30 AM */
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 32);
+
+        /* Repeating on every 20 minutes interval */
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                1000 * 60 * 20, pendingIntent);
+
+        Intent alarmIntent = new Intent(TimelineActivity.this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(TimelineActivity.this, 0, alarmIntent, 0);
+
+        notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(icon)
+                .setContentTitle(notificationTitle)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText))
+                .setPriority(Notification.PRIORITY_MAX)
+                .setContentText(notificationText);
+
+        Intent answerIntent = new Intent(this, AnswerReceiveActivity.class);
+        answerIntent.setAction("Yes");
+        PendingIntent pendingIntentYes = PendingIntent.getActivity(this, 1, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationBuilder.addAction(R.drawable.thumbs_up, "Yes", pendingIntentYes);
+
+        answerIntent.setAction("No");
+        PendingIntent pendingIntentNo = PendingIntent.getActivity(this, 1, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationBuilder.addAction(R.drawable.thumbs_down, "No", pendingIntentNo);
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
+
+        sendNotification();
+    }
+
+    private void setDataForMaxPriorityNotification() {
+        notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(icon)
+                .setContentTitle(notificationTitle)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText))
+                .setPriority(Notification.PRIORITY_MAX)
+                .setContentText(notificationText);
+
+        sendNotification();
+    }
+
+
+
+
 
     private void initViews() {
         timelineLayout = (ConstraintLayout) findViewById(R.id.timelineActivity);
