@@ -91,12 +91,10 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
         // method call to initialize the views
         initViews();
 
-        //datums ophalen
-        try {
-            timeline = new TimelineHandler();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        //get controledatum van api
+        getControleDatums getDatums = new getControleDatums(mail);
+        getDatums.execute();
+
         AlarmManager alarms = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
 
         Receiver receiver = new Receiver();
@@ -117,9 +115,6 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
         myIntent = new Intent(TimelineActivity.this,Receiver.class);
         pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
         alarms.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), operation) ;
-
-
-
     }
 
 
@@ -148,18 +143,6 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
         }
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-       /* if(firebaseAuth.getCurrentUser() == null){
-            //Als account al is ingelogd
-            finish();
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        }*/
-        // method call to initialize the views
-        initViews();
-
-        //get controledatum van api
-       getControleDatums getDatums = new getControleDatums(mail);
-       getDatums.execute();
     }
 
     private void sendNotification() {
@@ -369,6 +352,10 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
         //als revalidatie nog niet begonnen is dan doorsturen naar de countdown
         if(timeline.getRevalidatieDatum().getTime() > timeline.getCurrentTime().getTime()) {
             Intent intent = new Intent(this, RevalidatieControleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("timeline", timeline);
+
+            intent.putExtras(bundle);
             startActivity(intent);
         }
         //anders doorsturen naar de revalidatie oefeningen
@@ -385,7 +372,10 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
      */
     public void clickControle(View v){
         Intent intent = new Intent(this, ControleActivity.class);
-        intent.putExtra("timeline", (Serializable) timeline);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("timeline", timeline);
+
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

@@ -27,11 +27,7 @@ public class RevalidatieControleActivity extends AppCompatActivity {
         initViews();
 
         //datums ophalen
-        try {
-            timeline = new TimelineHandler();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        timeline = (TimelineHandler) getIntent().getSerializableExtra("timeline");
 
         //Behandelingspagina datums goed zetten
         fillBehandelingPagina();

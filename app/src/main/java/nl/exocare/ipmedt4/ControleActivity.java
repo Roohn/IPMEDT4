@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -17,7 +18,7 @@ public class ControleActivity extends AppCompatActivity {
     private long timeCountInMilliSecondsControle = 1 * 60000;
     TextView datumGipsBehandeling, textViewTime;
     ProgressBar progressBarCircle;
-    TimelineHandler timeline = null;
+    TimelineHandler timeline;
     private CountDownTimer countDownTimer;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,8 @@ public class ControleActivity extends AppCompatActivity {
         // method call to initialize the views
         initViews();
 
-        Intent intent = getIntent();
-        timeline = (TimelineHandler) intent.getSerializableExtra("timeline");
+        //datums ophalen
+        timeline = (TimelineHandler) getIntent().getSerializableExtra("timeline");
 
         //Behandelingspagina datums goed zetten
         fillBehandelingPagina();
