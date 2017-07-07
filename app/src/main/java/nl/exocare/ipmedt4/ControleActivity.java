@@ -1,5 +1,6 @@
 package nl.exocare.ipmedt4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -26,12 +27,8 @@ public class ControleActivity extends AppCompatActivity {
         // method call to initialize the views
         initViews();
 
-        //datums ophalen
-        try {
-            timeline = new TimelineHandler();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Intent intent = getIntent();
+        timeline = (TimelineHandler) intent.getSerializableExtra("timeline");
 
         //Behandelingspagina datums goed zetten
         fillBehandelingPagina();

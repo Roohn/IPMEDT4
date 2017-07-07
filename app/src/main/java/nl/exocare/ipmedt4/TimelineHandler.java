@@ -3,13 +3,14 @@ package nl.exocare.ipmedt4;
 import android.text.format.DateFormat;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class TimelineHandler {
+public class TimelineHandler implements Serializable {
     Date dateBegin, dateEind, dateControle, dateRevalidatie;
 
     public TimelineHandler(String tijd) throws ParseException {

@@ -33,6 +33,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -384,6 +385,7 @@ public class TimelineActivity extends AppCompatActivity implements View.OnClickL
      */
     public void clickControle(View v){
         Intent intent = new Intent(this, ControleActivity.class);
+        intent.putExtra("timeline", (Serializable) timeline);
         startActivity(intent);
     }
 
