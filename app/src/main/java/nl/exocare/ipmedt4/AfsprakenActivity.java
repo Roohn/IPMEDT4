@@ -3,6 +3,7 @@ package nl.exocare.ipmedt4;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AfsprakenActivity extends AppCompatActivity {
     String URL_POST = "http://project.ronaldtoldevelopment.nl/api/insertControle";
@@ -38,10 +41,17 @@ public class AfsprakenActivity extends AppCompatActivity {
         String userName = fromIntent.getStringExtra("user");
         String email = fromIntent.getStringExtra("email");
 
-        opslaan(inputDate.getText().toString(), inputTime.getText().toString(), inputDokter.getText().toString(), inputLocatie.getText().toString(), userName, email);
+        String regEx ="^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+        Matcher matcherObj = Pattern.compile(regEx).matcher(inputDate.getText().toString());
+        Log.d("datumstring: ", ""+inputDate.getText().toString());
+        if (matcherObj.matches()) {
+            opslaan(inputDate.getText().toString(), inputTime.getText().toString(), inputDokter.getText().toString(), inputLocatie.getText().toString(), userName, email);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        } else { //verkeerde datum
+            Toast.makeText(getApplication(), "Dit is geen datum!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
